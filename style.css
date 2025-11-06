@@ -1,0 +1,94 @@
+ :root{
+      --sky:#9fd3ff;
+      --ground:#7ec850;
+      --wall:#f2d2b6;
+      --roof:#b54343;
+      --door:#6b3f2a;
+      --window:#cfeffd;
+      --accent:#ffd166;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    body{background:linear-gradient(var(--sky), #cfe8ff 40%, white 100%);display:flex;align-items:center;justify-content:center;padding:36px}
+
+    /* Stage */
+    .stage{width:880px;max-width:95%;height:520px;background:transparent;position:relative;border-radius:12px;box-shadow:0 8px 30px rgba(28,40,50,0.12);overflow:hidden}
+
+    /* Sun & clouds */
+    .sun{position:absolute;right:48px;top:48px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff7c2, var(--accent));box-shadow:0 0 40px rgba(255,209,102,0.5);transform:scale(0);opacity:0;animation:sunPop .8s ease forwards .4s}
+    @keyframes sunPop{to{transform:scale(1);opacity:1}}
+
+    .cloud{position:absolute;background:#ffffffaa;padding:18px;border-radius:30px;filter:blur(.4px);opacity:0;transform:translateY(-10px);}
+    .cloud.c1{left:40px;top:70px;width:160px;height:60px;animation:cloudIn 1s ease forwards .6s}
+    .cloud.c2{left:120px;top:32px;width:120px;height:48px;animation:cloudIn 1s ease forwards .8s}
+    @keyframes cloudIn{to{opacity:1;transform:translateY(0)}}
+
+    /* Ground */
+    .ground{position:absolute;left:0;right:0;bottom:0;height:36%;background:linear-gradient(#7ec850,#6fb14a);border-top-left-radius:40% 18px;border-top-right-radius:40% 18px;transform:translateY(100%);animation:groundRise .6s ease forwards .9s}
+    @keyframes groundRise{to{transform:translateY(0)}}
+
+    /* House wrapper */
+    .house-wrap{position:absolute;left:50%;bottom:20%;transform:translateX(-50%) translateY(40px);width:380px;height:260px;pointer-events:none}
+
+    /* Wall */
+    .wall{position:absolute;left:0;right:0;bottom:0;height:70%;background:var(--wall);border:6px solid rgba(0,0,0,0.06);box-shadow:inset 0 -8px 0 rgba(0,0,0,0.04);transform:translateY(40px) scaleY(.8);opacity:0;border-radius:6px;animation:partIn .6s cubic-bezier(.2,.9,.2,1) forwards 1s}
+
+    /* Roof as triangle */
+    .roof{position:absolute;left:50%;transform:translateX(-50%) translateY(-20px);bottom:70%;width:0;height:0;border-left:220px solid transparent;border-right:220px solid transparent;border-bottom:120px solid var(--roof);opacity:0;transform-origin:center bottom;animation:roofDrop .6s cubic-bezier(.2,.9,.2,1) forwards 1.12s}
+    @keyframes roofDrop{to{opacity:1;transform:translateX(-50%) translateY(0) rotate(0deg)}}
+
+    /* Chimney */
+    .chimney{position:absolute;right:72px;bottom:180px;width:34px;height:64px;background:#8b3b3b;border-radius:4px;opacity:0;transform:translateY(-12px) rotate(-6deg);animation:chimneyUp .5s ease forwards 1.28s}
+    @keyframes chimneyUp{to{opacity:1;transform:translateY(0) rotate(0deg)}}
+
+    /* Door */
+    .door{position:absolute;left:50%;transform:translateX(-50%) translateY(30px);bottom:6px;width:84px;height:120px;background:var(--door);border-radius:6px;box-shadow:inset -6px 0 rgba(255,255,255,0.03);opacity:0;animation:partIn .5s ease forwards 1.4s}
+
+    /* Doorknob */
+    .knob{position:absolute;right:18px;top:56px;width:12px;height:12px;border-radius:50%;background:#ffd27a;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+
+    /* Windows */
+    .window{position:absolute;width:72px;height:64px;background:var(--window);border:6px solid rgba(0,0,0,0.06);border-radius:6px;opacity:0;transform:translateY(20px) scale(.9);box-shadow:inset 0 -4px 0 rgba(0,0,0,0.02)}
+    .window.w1{left:30px;top:46px;animation:partIn .5s ease forwards 1.22s}
+    .window.w2{right:30px;top:46px;animation:partIn .5s ease forwards 1.26s}
+
+    /* Window crossbars */
+    .window:before,.window:after{content:'';position:absolute;background:rgba(0,0,0,0.06)}
+    .window:before{left:50%;top:8px;width:6px;height:48px;transform:translateX(-50%)}
+    .window:after{top:50%;left:8px;height:6px;width:56px;transform:translateY(-50%)}
+
+    /* Path */
+    .path{position:absolute;left:50%;transform:translateX(-50%);bottom:-12px;width:120px;height:24px;background:linear-gradient(#d6c0a4,#b79a7b);border-radius:40px;opacity:0;transform-origin:center;animation:pathGrow .6s ease forwards 1.5s}
+    @keyframes pathGrow{to{opacity:1;transform:translateX(-50%) scaleX(1)}}
+
+    /* Details - shutters and flower box */
+    .shutter{position:absolute;width:12px;height:46px;background:#b86f46;border-radius:2px;top:12px}
+    .shutter.left{left:-18px}
+    .shutter.right{right:-18px}
+
+    .flower-box{position:absolute;left:50%;transform:translateX(-50%);bottom:78px;width:160px;height:18px;background:#8aa357;border-radius:6px;opacity:0;animation:partIn .45s ease forwards 1.62s}
+
+    /* Small details animation */
+    @keyframes partIn{to{opacity:1;transform:translateY(0) scale(1)}}
+
+    /* Construction Crane (fun extra) */
+    .crane{position:absolute;left:6%;top:2%;width:160px;height:300px;pointer-events:auto}
+    .crane .mast{position:absolute;left:44px;top:40px;width:6px;height:260px;background:#444;border-radius:3px;transform-origin:bottom;opacity:0;animation:craneIn .6s ease forwards .36s}
+    .crane .arm{position:absolute;left:0;top:40px;width:220px;height:8px;background:#444;border-radius:4px;transform-origin:left center;transform:rotate(-12deg) translateX(-20px);opacity:0;animation:craneIn .6s ease forwards .44s}
+    .crane .hook{position:absolute;left:200px;top:70px;width:8px;height:80px;background:#222;border-radius:4px;opacity:0;animation:craneHook .6s ease forwards .52s}
+    @keyframes craneIn{to{opacity:1;transform:translateX(0) rotate(0)}}
+    @keyframes craneHook{to{opacity:1;transform:translateY(0)}}
+
+    /* Play button */
+    .controls{position:absolute;left:16px;bottom:16px;display:flex;gap:8px}
+    button{background:rgba(255,255,255,0.95);border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(47,63,72,0.08)}
+
+    /* subtle shadow under house */
+    .shadow{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);width:300px;height:40px;background:radial-gradient(ellipse at center, rgba(0,0,0,0.18), rgba(0,0,0,0.02));border-radius:50%;opacity:0;animation:shadowIn .6s ease forwards 1.5s}
+    @keyframes shadowIn{to{opacity:1}}
+
+    /* Responsive tweaks */
+    @media (max-width:520px){
+      .stage{height:520px}
+      .crane{display:none}
+    }
